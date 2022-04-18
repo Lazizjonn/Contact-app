@@ -29,7 +29,6 @@ class LoginScreen : Fragment(R.layout.fragment_login_screen) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) = binding.myApply {
 
-
         editTextPassword.addListener {
             boolPassword = it.length in 3 until 15
             check()
@@ -50,7 +49,6 @@ class LoginScreen : Fragment(R.layout.fragment_login_screen) {
             )
         }
 
-
         viewModel.errorLiveData.observe(viewLifecycleOwner, errorObserver)
         viewModel.notConnectionLiveData.observe(viewLifecycleOwner, notConnectionObserver)
         viewModel.openContactScreenLiveData.observe(viewLifecycleOwner, openContactScreenObserver)
@@ -64,14 +62,12 @@ class LoginScreen : Fragment(R.layout.fragment_login_screen) {
     }
 
     private val errorObserver = Observer<String> { showToast(it) }
-
     private val openContactScreenObserver = Observer<Unit> {
         findNavController().navigate(R.id.action_loginScreen_to_contactScreen)
     }
     private val openRegisterScreenObserver = Observer<Unit> {
         findNavController().navigate(R.id.action_loginScreen_to_registerScreen)
     }
-
     private val notConnectionObserver = Observer<Unit> {
         showToast("Sizda mavjud emas")
     }

@@ -11,7 +11,6 @@ interface CodeVerifyViewModel {
     val openContactScreenLiveData : LiveData<Unit>
     val errorLiveData : LiveData<String>
 
-
     fun checkCode(data: Verify2Request)
 }
 

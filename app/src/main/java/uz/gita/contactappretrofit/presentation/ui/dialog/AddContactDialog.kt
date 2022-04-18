@@ -15,10 +15,9 @@ class AddContactDialog : DialogFragment(R.layout.dialog_add_contact) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setStyle(DialogFragment.STYLE_NO_TITLE, R.style.DialogStyle)
+        setStyle(STYLE_NO_TITLE, R.style.DialogStyle)
 
     }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) = binding.myApply {
         close.setOnClickListener { dismiss() }
         save.setOnClickListener {

@@ -17,13 +17,10 @@ class ApiModule {
 
     @[Provides Singleton]
     fun logging(): HttpLoggingInterceptor = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BASIC)
-    var client = OkHttpClient.Builder().addInterceptor(logging()).build()
-
-
     @[Provides Singleton]
     fun getRetrofitObject(): Retrofit = Retrofit.Builder().baseUrl("http://ef15-87-18-142-226.ngrok.io")
         .addConverterFactory(GsonConverterFactory.create()).client(client).build()
-
     @[Provides Singleton]
     fun getContactApi(retrofit: Retrofit): ContactApi = retrofit.create(ContactApi::class.java)
+    var client = OkHttpClient.Builder().addInterceptor(logging()).build()
 }

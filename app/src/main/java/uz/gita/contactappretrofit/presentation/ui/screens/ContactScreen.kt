@@ -52,11 +52,9 @@ class ContactScreen : Fragment(R.layout.fragment_contact_screen) {
         viewModel.updateItemLiveData.observe(viewLifecycleOwner, updateItemObserver)
     }
 
-
     private val contactObserver = Observer<List<ContactResponse>> {
         adapter.submitList(it.toMutableList())
     }
-
     private val deletedItemObserver = Observer<Long> { coming ->
         viewModel.load()
     }
@@ -101,7 +99,5 @@ class ContactScreen : Fragment(R.layout.fragment_contact_screen) {
     private val updateItemObserver = Observer<Unit> {
         viewModel.load()
     }
-
-
 }
 

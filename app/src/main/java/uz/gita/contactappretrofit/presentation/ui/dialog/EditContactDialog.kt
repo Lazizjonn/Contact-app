@@ -10,12 +10,7 @@ import androidx.cardview.widget.CardView
 import uz.gita.contactappretrofit.R
 
 
-class EditContactDialog(
-    context: Context,
-    private val oldFirstName: String,
-    private val oldLastName: String,
-    private val oldPhoneNumber: String
-) : AlertDialog(context) {
+class EditContactDialog( context: Context, private val oldFirstName: String, private val oldLastName: String, private val oldPhoneNumber: String) : AlertDialog(context) {
 
     private var editContactListener: ((String, String, String) -> Unit)? = null
 
@@ -24,7 +19,7 @@ class EditContactDialog(
         val view = LayoutInflater.from(context).inflate(R.layout.dialog_edit_contact, null, false)
         setContentView(view)
 
-        window?.clearFlags(WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
+        window?.clearFlags(WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM)
 
         val inputFirstName: EditText = view.findViewById(R.id.firstName)
         val inputLastName: EditText = view.findViewById(R.id.lastName)

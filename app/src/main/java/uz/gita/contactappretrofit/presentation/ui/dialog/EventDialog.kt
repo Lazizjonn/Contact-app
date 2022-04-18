@@ -16,7 +16,6 @@ class EventDialog : BottomSheetDialogFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.event_dialog, container)
     }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         view.findViewById<LinearLayoutCompat>(R.id.lineEdit).setOnClickListener {
             clickEditButtonListener?.invoke()
@@ -31,7 +30,6 @@ class EventDialog : BottomSheetDialogFragment() {
     fun setClickEditButtonListener(block: () -> Unit) {
         clickEditButtonListener = block
     }
-
     fun setClickDeleteButtonListener(block: () -> Unit) {
         clickDeleteButtonListener = block
     }

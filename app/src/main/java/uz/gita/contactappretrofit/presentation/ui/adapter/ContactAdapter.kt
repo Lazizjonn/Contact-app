@@ -22,7 +22,6 @@ class ContactAdapter : ListAdapter<ContactResponse, ContactAdapter.ContactViewHo
             return oldItem == newItem
         }
     }
-
     inner class ContactViewHolder(private val binding: ItemContactBinding) : RecyclerView.ViewHolder(binding.root) {
         init {
             binding.buttonMore.setOnClickListener {
@@ -38,10 +37,8 @@ class ContactAdapter : ListAdapter<ContactResponse, ContactAdapter.ContactViewHo
             }
         }
     }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         ContactViewHolder(ItemContactBinding.inflate(LayoutInflater.from(parent.context), parent, false))
-
     override fun onBindViewHolder(holder: ContactViewHolder, position: Int) {
         holder.bind()
     }

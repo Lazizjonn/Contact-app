@@ -20,7 +20,7 @@ import java.util.concurrent.Executors
 import javax.inject.Inject
 
 @HiltViewModel
-class ContactViewModelImpl@Inject constructor(private val api: ContactApi, private val pref : MySharedPref) : ViewModel() , ContactViewModel{
+class ContactViewModelImpl@Inject constructor(private val api: ContactApi, pref : MySharedPref) : ViewModel() , ContactViewModel{
 
     override val contactLiveData = MutableLiveData<List<ContactResponse>>()
     override val insertLiveData = MutableLiveData<Unit>()
@@ -63,31 +63,6 @@ class ContactViewModelImpl@Inject constructor(private val api: ContactApi, priva
                     }
                 }
             }
-
-
-/*            progressLiveData.value = true
-            api.getAllContact().enqueue(object : Callback<List<ContactResponse>> {
-                override fun onResponse(
-                    call: Call<List<ContactResponse>>,
-                    response: Response<List<ContactResponse>>
-                ) {
-                    progressLiveData.postValue(false)
-                    if (response.isSuccessful) {
-                        response.body()?.let {
-                            contactLiveData.value = it
-                            list.clear()
-                            list.addAll(it)
-                        }
-                    } else {
-                        errorResponseLiveData.value = ("Unsuccessful")
-                    }
-                }
-
-                override fun onFailure(call: Call<List<ContactResponse>>, t: Throwable) {
-                    progressLiveData.value = (false)
-                    errorResponseLiveData.value = (t.message)
-                }
-            })*/
         }
     }
     override fun insertContact(data: ContactRequest) {
@@ -114,7 +89,6 @@ class ContactViewModelImpl@Inject constructor(private val api: ContactApi, priva
         })
     }
     override fun update(data: ContactResponse) {
-
         progressLiveData.value = true
         api.updateContact(token, data).enqueue(object : Callback<ContactResponse> {
             override fun onResponse(call: Call<ContactResponse>, response: Response<ContactResponse>) {
@@ -138,14 +112,11 @@ class ContactViewModelImpl@Inject constructor(private val api: ContactApi, priva
 
     }
     override fun delete(id: Long) {
-        Log.d("TAG", "delete2 data id = : "+ id)
-
         progressLiveData.value = true
         api.deleteContact(token, id).enqueue(object : Callback<DeleteContactResponse> {
             override fun onResponse(
                 call: Call<DeleteContactResponse>, response: Response<DeleteContactResponse>
             ) {
-                Log.d("TAG", "delete3 data id = : "+ response.body()?.id)
                 progressLiveData.postValue(false)
                 if (response.isSuccessful) {
 
@@ -157,7 +128,6 @@ class ContactViewModelImpl@Inject constructor(private val api: ContactApi, priva
             }
 
             override fun onFailure(call: Call<DeleteContactResponse>, t: Throwable) {
-                Log.d("TAG", "delete4 data id message = : "+t.message)
                 progressLiveData.postValue(false)
                 errorResponseLiveData.postValue(t.message)
             }

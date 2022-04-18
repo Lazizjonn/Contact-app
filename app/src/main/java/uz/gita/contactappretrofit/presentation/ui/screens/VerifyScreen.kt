@@ -25,18 +25,20 @@ class VerifyScreen : Fragment(R.layout.fragment_verify_screen) {
     private val viewModel: CodeVerifyViewModel by viewModels<CodeVerifyViewModelImpl>()
     private var numberList = ArrayList<TextView>()
     private var code = StringBuilder(6)
-    private val args : VerifyScreenArgs by navArgs()
+    private val args: VerifyScreenArgs by navArgs()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) = binding.myApply {
 
         loadViews()
 
         binding.keyboard.btConfirm.setOnClickListener {
-            var data = args.data
+            val data = args.data
 
             data?.phone?.let { it1 ->
-                Verify2Request(   it1,
-                    code.toString()  )
+                Verify2Request(
+                    it1,
+                    code.toString()
+                )
             }?.let { it2 ->
                 viewModel.checkCode(
                     it2

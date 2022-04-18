@@ -16,10 +16,12 @@ import uz.gita.contactappretrofit.utils.myApply
 
 @AndroidEntryPoint
 class SplashScreen : Fragment(R.layout.fragment_splash_screen) {
+
     private val binding by viewBinding(FragmentSplashScreenBinding::bind)
     private val viewModel: SplashViewModel by viewModels<SplashViewModelImpl>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) = binding.myApply {
+
         viewModel.openLoginScreenLiveData.observe(viewLifecycleOwner, openLoginScreenObserver)
         viewModel.openContactScreenLiveData.observe(viewLifecycleOwner, openContactScreenObserver)
     }
@@ -27,7 +29,6 @@ class SplashScreen : Fragment(R.layout.fragment_splash_screen) {
     private val openLoginScreenObserver = Observer<Unit> {
         findNavController().navigate(R.id.action_splashScreen_to_loginScreen)
     }
-
     private val openContactScreenObserver = Observer<Unit> {
         findNavController().navigate(R.id.action_splashScreen_to_contactScreen)
     }

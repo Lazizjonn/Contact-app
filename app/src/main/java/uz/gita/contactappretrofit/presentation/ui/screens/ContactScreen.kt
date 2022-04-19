@@ -15,9 +15,9 @@ import uz.gita.contactappretrofit.data.model.request.ContactRequest
 import uz.gita.contactappretrofit.data.model.response.ContactResponse
 import uz.gita.contactappretrofit.databinding.FragmentContactScreenBinding
 import uz.gita.contactappretrofit.presentation.ui.adapter.ContactAdapter
-import uz.gita.contactappretrofit.presentation.ui.dialog.AddContactDialog
-import uz.gita.contactappretrofit.presentation.ui.dialog.EditContactDialog
-import uz.gita.contactappretrofit.presentation.ui.dialog.EventDialog
+import uz.gita.contactappretrofit.presentation.ui.dialogs.AddContactDialog
+import uz.gita.contactappretrofit.presentation.ui.dialogs.EditContactDialog
+import uz.gita.contactappretrofit.presentation.ui.dialogs.EventDialog
 import uz.gita.contactappretrofit.presentation.viewmodels.ContactViewModel
 import uz.gita.contactappretrofit.presentation.viewmodels.impl.ContactViewModelImpl
 import uz.gita.contactappretrofit.utils.myApply
@@ -29,8 +29,13 @@ class ContactScreen : Fragment(R.layout.fragment_contact_screen) {
     private val binding by viewBinding(FragmentContactScreenBinding::bind)
     private val adapter by lazy(LazyThreadSafetyMode.NONE) { ContactAdapter() }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) = binding.myApply {
+
+        contactList.adapter = adapter
+        contactList.layoutManager = LinearLayoutManager(requireContext())
+        buttonAdd.setOnClickListener { viewModel.showAddContactDialog() }
+        adapter.setSelectContactDataListener { viewModel.showEventDialog(it) }
+
         viewModel.contactLiveData.observe(viewLifecycleOwner, contactObserver)
         viewModel.insertLiveData.observe(viewLifecycleOwner, insertObserver)
         viewModel.showAddContactDialogLiveData.observe(viewLifecycleOwner, showAddContactDialogObserver)
@@ -41,16 +46,6 @@ class ContactScreen : Fragment(R.layout.fragment_contact_screen) {
         viewModel.notConnectionLiveData.observe(viewLifecycleOwner, notConnectionObserver)
         viewModel.deletedItemLiveData.observe(viewLifecycleOwner, deletedItemObserver)
         viewModel.updateItemLiveData.observe(viewLifecycleOwner, updateItemObserver)
-
-    }
-
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) = binding.myApply {
-
-        contactList.adapter = adapter
-        contactList.layoutManager = LinearLayoutManager(requireContext())
-        buttonAdd.setOnClickListener { viewModel.showAddContactDialog() }
-        adapter.setSelectContactDataListener { viewModel.showEventDialog(it) }
     }
 
     private val contactObserver = Observer<List<ContactResponse>> {

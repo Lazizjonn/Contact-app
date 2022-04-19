@@ -65,7 +65,7 @@
             app:popUpToInclusive="true" />
         <argument
             android:name="data"
-            app:argType="uz.gita.contactappretrofit.data.remote.data.request.Register2Request"
+            app:argType="uz.gita.contactappretrofit.data.model.request.Register2Request"
             app:nullable="true" />
     </fragment>
 </navigation>

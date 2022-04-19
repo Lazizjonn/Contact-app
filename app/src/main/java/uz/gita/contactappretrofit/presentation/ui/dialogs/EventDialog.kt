@@ -1,4 +1,4 @@
-package uz.gita.contactappretrofit.presentation.ui.dialog
+package uz.gita.contactappretrofit.presentation.ui.dialogs
 
 import android.os.Bundle
 import android.view.LayoutInflater

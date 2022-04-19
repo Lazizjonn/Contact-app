@@ -16,6 +16,7 @@ android {
         versionCode 1
         versionName "1.0"
 
+        buildConfigField('String', 'BASE_URL', '"http://ef15-87-18-142-226.ngrok.io"')
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -32,7 +33,6 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-
     buildFeatures {
         viewBinding true
     }

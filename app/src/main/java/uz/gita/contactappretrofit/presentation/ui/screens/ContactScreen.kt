@@ -58,7 +58,7 @@ class ContactScreen : Fragment(R.layout.fragment_contact_screen) {
     private val contactObserver = Observer<List<ContactResponse>> {
         adapter.submitList(it.toMutableList())
     }
-    private val deletedItemObserver = Observer<Long> { coming ->
+    private val deletedItemObserver = Observer<Long> {
         viewModel.load()
     }
     private val showAddContactDialogObserver = Observer<Unit> {

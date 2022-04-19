@@ -1,4 +1,4 @@
-package uz.gita.contactappretrofit.data.remote.data.request
+package uz.gita.contactappretrofit.data.model.request
 
 data class ContactRequest(
     val firstName: String,

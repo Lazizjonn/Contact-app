@@ -1,8 +1,7 @@
 package uz.gita.contactappretrofit.presentation.viewmodels
 
 import androidx.lifecycle.LiveData
-import uz.gita.contactappretrofit.data.remote.data.request.Verify2Request
-import uz.gita.contactappretrofit.data.remote.data.response.Verify2Response
+import uz.gita.contactappretrofit.data.model.request.Verify2Request
 
 interface CodeVerifyViewModel {
 

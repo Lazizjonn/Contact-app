@@ -9,7 +9,7 @@ import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import uz.gita.contactappretrofit.R
-import uz.gita.contactappretrofit.data.remote.data.request.Register2Request
+import uz.gita.contactappretrofit.data.model.request.Register2Request
 import uz.gita.contactappretrofit.databinding.FragmentRegisterScreenBinding
 import uz.gita.contactappretrofit.presentation.viewmodels.RegisterViewModel
 import uz.gita.contactappretrofit.presentation.viewmodels.impl.RegisterViewModelImpl

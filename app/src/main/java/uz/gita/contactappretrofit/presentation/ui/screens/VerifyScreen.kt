@@ -11,7 +11,7 @@ import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import uz.gita.contactappretrofit.R
-import uz.gita.contactappretrofit.data.remote.data.request.Verify2Request
+import uz.gita.contactappretrofit.data.model.request.Verify2Request
 import uz.gita.contactappretrofit.databinding.FragmentVerifyScreenBinding
 import uz.gita.contactappretrofit.presentation.viewmodels.CodeVerifyViewModel
 import uz.gita.contactappretrofit.presentation.viewmodels.impl.CodeVerifyViewModelImpl

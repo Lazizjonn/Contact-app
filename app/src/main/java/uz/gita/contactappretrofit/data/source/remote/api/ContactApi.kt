@@ -1,12 +1,12 @@
-package uz.gita.contactappretrofit.data.remote.api
+package uz.gita.contactappretrofit.data.source.remote.api
 
 import retrofit2.Call
 import retrofit2.http.*
-import uz.gita.contactappretrofit.data.remote.data.request.ContactRequest
-import uz.gita.contactappretrofit.data.remote.data.request.Login2Request
-import uz.gita.contactappretrofit.data.remote.data.request.Register2Request
-import uz.gita.contactappretrofit.data.remote.data.request.Verify2Request
-import uz.gita.contactappretrofit.data.remote.data.response.*
+import uz.gita.contactappretrofit.data.model.request.ContactRequest
+import uz.gita.contactappretrofit.data.model.request.Login2Request
+import uz.gita.contactappretrofit.data.model.request.Register2Request
+import uz.gita.contactappretrofit.data.model.request.Verify2Request
+import uz.gita.contactappretrofit.data.model.response.*
 
 interface ContactApi {
 

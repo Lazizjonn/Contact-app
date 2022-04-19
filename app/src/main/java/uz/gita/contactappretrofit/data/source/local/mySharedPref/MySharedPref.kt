@@ -1,4 +1,4 @@
-package uz.gita.contactappretrofit.data.local
+package uz.gita.contactappretrofit.data.source.local.mySharedPref
 
 import android.content.Context
 import dagger.hilt.android.qualifiers.ApplicationContext

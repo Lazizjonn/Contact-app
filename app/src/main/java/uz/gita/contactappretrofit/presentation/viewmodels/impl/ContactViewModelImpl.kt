@@ -2,18 +2,17 @@ package uz.gita.contactappretrofit.presentation.viewmodels.impl
 
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import uz.gita.contactappretrofit.data.local.MySharedPref
-import uz.gita.contactappretrofit.data.remote.api.ContactApi
-import uz.gita.contactappretrofit.data.remote.data.request.ContactRequest
-import uz.gita.contactappretrofit.data.remote.data.response.ContactResponse
-import uz.gita.contactappretrofit.data.remote.data.response.DeleteContactResponse
+import uz.gita.contactappretrofit.data.source.local.mySharedPref.MySharedPref
+import uz.gita.contactappretrofit.data.source.remote.api.ContactApi
+import uz.gita.contactappretrofit.data.model.request.ContactRequest
+import uz.gita.contactappretrofit.data.model.response.ContactResponse
+import uz.gita.contactappretrofit.data.model.response.DeleteContactResponse
 import uz.gita.contactappretrofit.presentation.viewmodels.ContactViewModel
 import uz.gita.contactappretrofit.utils.isConnected
 import java.util.concurrent.Executors

@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import uz.gita.contactappretrofit.data.remote.data.response.ContactResponse
+import uz.gita.contactappretrofit.data.model.response.ContactResponse
 import uz.gita.contactappretrofit.databinding.ItemContactBinding
 
 

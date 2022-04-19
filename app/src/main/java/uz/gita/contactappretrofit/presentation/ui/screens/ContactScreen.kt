@@ -11,17 +11,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import uz.gita.contactappretrofit.R
-import uz.gita.contactappretrofit.data.remote.data.request.ContactRequest
-import uz.gita.contactappretrofit.data.remote.data.response.ContactResponse
+import uz.gita.contactappretrofit.data.model.request.ContactRequest
+import uz.gita.contactappretrofit.data.model.response.ContactResponse
 import uz.gita.contactappretrofit.databinding.FragmentContactScreenBinding
 import uz.gita.contactappretrofit.presentation.ui.adapter.ContactAdapter
 import uz.gita.contactappretrofit.presentation.ui.dialog.AddContactDialog
 import uz.gita.contactappretrofit.presentation.ui.dialog.EditContactDialog
 import uz.gita.contactappretrofit.presentation.ui.dialog.EventDialog
 import uz.gita.contactappretrofit.presentation.viewmodels.ContactViewModel
-import uz.gita.contactappretrofit.presentation.viewmodels.LoginViewModel
 import uz.gita.contactappretrofit.presentation.viewmodels.impl.ContactViewModelImpl
-import uz.gita.contactappretrofit.presentation.viewmodels.impl.LoginViewModelImpl
 import uz.gita.contactappretrofit.utils.myApply
 
 @AndroidEntryPoint

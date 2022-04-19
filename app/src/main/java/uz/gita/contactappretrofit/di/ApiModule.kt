@@ -9,7 +9,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import uz.gita.contactappretrofit.BuildConfig.BASE_URL
-import uz.gita.contactappretrofit.data.remote.api.ContactApi
+import uz.gita.contactappretrofit.data.source.remote.api.ContactApi
 import javax.inject.Singleton
 
 @Module

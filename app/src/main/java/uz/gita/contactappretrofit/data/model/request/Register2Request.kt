@@ -1,4 +1,4 @@
-package uz.gita.contactappretrofit.data.remote.data.request
+package uz.gita.contactappretrofit.data.model.request
 
 import android.os.Parcel
 import android.os.Parcelable

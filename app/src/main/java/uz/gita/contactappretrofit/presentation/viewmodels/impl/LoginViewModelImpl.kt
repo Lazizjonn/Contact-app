@@ -3,9 +3,9 @@ package uz.gita.contactappretrofit.presentation.viewmodels.impl
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
-import uz.gita.contactappretrofit.data.local.MySharedPref
-import uz.gita.contactappretrofit.data.remote.api.ContactApi
-import uz.gita.contactappretrofit.data.remote.data.request.Login2Request
+import uz.gita.contactappretrofit.data.source.local.mySharedPref.MySharedPref
+import uz.gita.contactappretrofit.data.source.remote.api.ContactApi
+import uz.gita.contactappretrofit.data.model.request.Login2Request
 import uz.gita.contactappretrofit.presentation.viewmodels.LoginViewModel
 import uz.gita.contactappretrofit.utils.isConnected
 import uz.gita.contactappretrofit.utils.myEnqueue

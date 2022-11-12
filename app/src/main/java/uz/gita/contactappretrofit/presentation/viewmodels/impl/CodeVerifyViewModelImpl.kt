@@ -12,7 +12,9 @@ import uz.gita.contactappretrofit.utils.myEnqueue
 import javax.inject.Inject
 
 @HiltViewModel
-class CodeVerifyViewModelImpl @Inject constructor(private val api: ContactApi, private val pref: MySharedPref) : ViewModel(), CodeVerifyViewModel {
+class CodeVerifyViewModelImpl @Inject constructor(
+    private val api: ContactApi,
+    private val pref: MySharedPref) : ViewModel(), CodeVerifyViewModel {
 
     override val progressLiveData = MutableLiveData<Boolean>()
     override val notConnectionLiveData = MutableLiveData<Unit>()

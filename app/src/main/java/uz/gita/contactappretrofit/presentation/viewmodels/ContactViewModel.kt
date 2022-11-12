@@ -1,6 +1,7 @@
 package uz.gita.contactappretrofit.presentation.viewmodels
 
 import androidx.lifecycle.LiveData
+import uz.gita.contactappretrofit.data.model.firebase.ContactDataFireBase
 import uz.gita.contactappretrofit.data.model.request.ContactRequest
 import uz.gita.contactappretrofit.data.model.response.ContactResponse
 
@@ -13,9 +14,12 @@ interface ContactViewModel {
     val deletedItemLiveData: LiveData<Long>
     val notConnectionLiveData: LiveData<Unit>
     val showAddContactDialogLiveData: LiveData<Unit>
-    val showEventDialogLiveData: LiveData<ContactResponse>
-    val showEditDialogLiveData: LiveData<ContactResponse>
+    val showEventDialogLiveData: LiveData<ContactDataFireBase>
+    val showEditDialogLiveData: LiveData<ContactDataFireBase>
     val updateItemLiveData: LiveData<Unit>
+    val contactFirebaseLiveData : LiveData<List<ContactDataFireBase>>
+    val errorFireBaseLiveData: LiveData<String>
+
 
     fun load()
     fun insertContact(data: ContactRequest)
@@ -23,6 +27,6 @@ interface ContactViewModel {
     fun delete(id: Long)
 
     fun showAddContactDialog()
-    fun showEventDialog(data: ContactResponse)
-    fun showEditDialog(data: ContactResponse)
+    fun showEventDialog(data: ContactDataFireBase)
+    fun showEditDialog(data: ContactDataFireBase)
 }

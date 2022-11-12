@@ -4,22 +4,31 @@ import android.os.Handler
 import android.os.Looper
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import uz.gita.contactappretrofit.data.source.local.mySharedPref.MySharedPref
-import uz.gita.contactappretrofit.data.source.remote.api.ContactApi
+import uz.gita.contactappretrofit.data.model.firebase.ContactDataFireBase
 import uz.gita.contactappretrofit.data.model.request.ContactRequest
 import uz.gita.contactappretrofit.data.model.response.ContactResponse
 import uz.gita.contactappretrofit.data.model.response.DeleteContactResponse
+import uz.gita.contactappretrofit.data.source.local.mySharedPref.MySharedPref
+import uz.gita.contactappretrofit.data.source.remote.api.ContactApi
+import uz.gita.contactappretrofit.domain.repository.AppRepository
 import uz.gita.contactappretrofit.presentation.viewmodels.ContactViewModel
 import uz.gita.contactappretrofit.utils.isConnected
 import java.util.concurrent.Executors
 import javax.inject.Inject
 
 @HiltViewModel
-class ContactViewModelImpl@Inject constructor(private val api: ContactApi, pref : MySharedPref) : ViewModel() , ContactViewModel{
+class ContactViewModelImpl @Inject constructor(
+    private val api: ContactApi,
+    private val repository: AppRepository,
+    pref: MySharedPref
+) : ViewModel(), ContactViewModel {
 
     override val contactLiveData = MutableLiveData<List<ContactResponse>>()
     override val insertLiveData = MutableLiveData<Unit>()
@@ -28,16 +37,41 @@ class ContactViewModelImpl@Inject constructor(private val api: ContactApi, pref 
     override val deletedItemLiveData = MutableLiveData<Long>()
     override val notConnectionLiveData = MutableLiveData<Unit>()
     override val showAddContactDialogLiveData = MutableLiveData<Unit>()
-    override val showEventDialogLiveData = MutableLiveData<ContactResponse>()
-    override val showEditDialogLiveData = MutableLiveData<ContactResponse>()
+    override val showEventDialogLiveData = MutableLiveData<ContactDataFireBase>()
+    override val showEditDialogLiveData = MutableLiveData<ContactDataFireBase>()
     override val updateItemLiveData = MutableLiveData<Unit>()
+    override val contactFirebaseLiveData = MutableLiveData<List<ContactDataFireBase>>()
+    override val errorFireBaseLiveData = MutableLiveData<String>()
 
     private val executor = Executors.newSingleThreadExecutor()
     private val handler by lazy { Handler(Looper.getMainLooper()) }
     private val token = pref.token
 
     init {
-        load()
+        load() // with internet
+
+
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.getAllContactFromFireBase({
+                contactFirebaseLiveData.postValue(it)
+            }, {
+                errorFireBaseLiveData.postValue(it)
+            })
+        }
+
+    }
+
+
+    override fun showAddContactDialog() {
+        showAddContactDialogLiveData.value = Unit
+    }
+
+    override fun showEventDialog(data: ContactDataFireBase) {
+        showEventDialogLiveData.value = data
+    }
+
+    override fun showEditDialog(data: ContactDataFireBase) {
+        showEditDialogLiveData.value = data
     }
 
     override fun load() {
@@ -64,15 +98,16 @@ class ContactViewModelImpl@Inject constructor(private val api: ContactApi, pref 
             }
         }
     }
+
     override fun insertContact(data: ContactRequest) {
 
         progressLiveData.value = true
-        api.addContact(token,data).enqueue(object : Callback<ContactResponse> {
+        api.addContact(token, data).enqueue(object : Callback<ContactResponse> {
             override fun onResponse(call: Call<ContactResponse>, response: Response<ContactResponse>) {
                 if (response.isSuccessful) {
                     response.body()?.let {
                         insertLiveData.value = Unit
-                        progressLiveData.value=(false)
+                        progressLiveData.value = (false)
                     }
                 } else {
                     progressLiveData.postValue(false)
@@ -87,6 +122,7 @@ class ContactViewModelImpl@Inject constructor(private val api: ContactApi, pref 
             }
         })
     }
+
     override fun update(data: ContactResponse) {
         progressLiveData.value = true
         api.updateContact(token, data).enqueue(object : Callback<ContactResponse> {
@@ -110,6 +146,7 @@ class ContactViewModelImpl@Inject constructor(private val api: ContactApi, pref 
         })
 
     }
+
     override fun delete(id: Long) {
         progressLiveData.value = true
         api.deleteContact(token, id).enqueue(object : Callback<DeleteContactResponse> {
@@ -133,15 +170,5 @@ class ContactViewModelImpl@Inject constructor(private val api: ContactApi, pref 
         })
 
 
-
-    }
-    override fun showAddContactDialog() {
-        showAddContactDialogLiveData.value = Unit
-    }
-    override fun showEventDialog(data: ContactResponse) {
-        showEventDialogLiveData.value = data
-    }
-    override fun showEditDialog(data: ContactResponse) {
-        showEditDialogLiveData.value = data
     }
 }

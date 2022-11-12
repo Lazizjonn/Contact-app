@@ -11,10 +11,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import uz.gita.contactappretrofit.R
+import uz.gita.contactappretrofit.data.model.firebase.ContactDataFireBase
 import uz.gita.contactappretrofit.data.model.request.ContactRequest
 import uz.gita.contactappretrofit.data.model.response.ContactResponse
 import uz.gita.contactappretrofit.databinding.FragmentContactScreenBinding
 import uz.gita.contactappretrofit.presentation.ui.adapter.ContactAdapter
+import uz.gita.contactappretrofit.presentation.ui.adapter.ContactFirebaseAdapter
 import uz.gita.contactappretrofit.presentation.ui.dialogs.AddContactDialog
 import uz.gita.contactappretrofit.presentation.ui.dialogs.EditContactDialog
 import uz.gita.contactappretrofit.presentation.ui.dialogs.EventDialog
@@ -27,16 +29,17 @@ class ContactScreen : Fragment(R.layout.fragment_contact_screen) {
 
     private val viewModel: ContactViewModel by viewModels<ContactViewModelImpl>()
     private val binding by viewBinding(FragmentContactScreenBinding::bind)
-    private val adapter by lazy(LazyThreadSafetyMode.NONE) { ContactAdapter() }
+//    private val adapter by lazy(LazyThreadSafetyMode.NONE) { ContactAdapter() }
+    private val adapter2 by lazy(LazyThreadSafetyMode.NONE) { ContactFirebaseAdapter() }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) = binding.myApply {
 
-        contactList.adapter = adapter
+        contactList.adapter = adapter2
         contactList.layoutManager = LinearLayoutManager(requireContext())
         buttonAdd.setOnClickListener { viewModel.showAddContactDialog() }
-        adapter.setSelectContactDataListener { viewModel.showEventDialog(it) }
+        adapter2.setSelectContactDataListener { viewModel.showEventDialog(it) }
 
-        viewModel.contactLiveData.observe(viewLifecycleOwner, contactObserver)
+/*        viewModel.contactLiveData.observe(viewLifecycleOwner, contactObserver)
         viewModel.insertLiveData.observe(viewLifecycleOwner, insertObserver)
         viewModel.showAddContactDialogLiveData.observe(viewLifecycleOwner, showAddContactDialogObserver)
         viewModel.showEventDialogLiveData.observe(viewLifecycleOwner, showEventDialogObserver)
@@ -45,10 +48,12 @@ class ContactScreen : Fragment(R.layout.fragment_contact_screen) {
         viewModel.progressLiveData.observe(viewLifecycleOwner, progressObserver)
         viewModel.notConnectionLiveData.observe(viewLifecycleOwner, notConnectionObserver)
         viewModel.deletedItemLiveData.observe(viewLifecycleOwner, deletedItemObserver)
-        viewModel.updateItemLiveData.observe(viewLifecycleOwner, updateItemObserver)
+        viewModel.updateItemLiveData.observe(viewLifecycleOwner, updateItemObserver)*/
+        viewModel.contactFirebaseLiveData.observe(viewLifecycleOwner, contactFirebaseObserver)
+        viewModel.errorFireBaseLiveData.observe(viewLifecycleOwner, errorFirebaseObserver)
     }
 
-    private val contactObserver = Observer<List<ContactResponse>> {
+/*    private val contactObserver = Observer<List<ContactResponse>> {
         adapter.submitList(it.toMutableList())
     }
     private val deletedItemObserver = Observer<Long> {
@@ -61,7 +66,7 @@ class ContactScreen : Fragment(R.layout.fragment_contact_screen) {
         }
         dialog.show(childFragmentManager, "Add")
     }
-    private val showEventDialogObserver = Observer<ContactResponse> { data ->
+    private val showEventDialogObserver = Observer<ContactDataFireBase> { data ->
         val eventDialog = EventDialog()
         eventDialog.setClickEditButtonListener { viewModel.showEditDialog(data) }
         eventDialog.setClickDeleteButtonListener {
@@ -70,7 +75,7 @@ class ContactScreen : Fragment(R.layout.fragment_contact_screen) {
         }
         eventDialog.show(childFragmentManager, "Event")
     }
-    private val showEditDialogObserver = Observer<ContactResponse> { data ->
+    private val showEditDialogObserver = Observer<ContactDataFireBase> { data ->
         val editDialog =
             EditContactDialog(requireContext(), data.firstName, data.lastName, data.phone)
 
@@ -94,6 +99,14 @@ class ContactScreen : Fragment(R.layout.fragment_contact_screen) {
     }
     private val updateItemObserver = Observer<Unit> {
         viewModel.load()
+    }*/
+
+    private val contactFirebaseObserver = Observer<List<ContactDataFireBase>> {
+        adapter2.submitList(it.toMutableList())
+    }
+
+    private val errorFirebaseObserver = Observer<String> {
+
     }
 }
 

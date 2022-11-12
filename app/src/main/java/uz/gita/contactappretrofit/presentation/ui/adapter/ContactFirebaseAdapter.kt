@@ -6,26 +6,28 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import uz.gita.contactappretrofit.data.model.firebase.ContactDataFireBase
 import uz.gita.contactappretrofit.data.model.response.ContactResponse
+import uz.gita.contactappretrofit.data.source.local.room.entity.ContactData
 import uz.gita.contactappretrofit.databinding.ItemContactBinding
 
 
-class ContactAdapter : ListAdapter<ContactResponse, ContactAdapter.ContactViewHolder>(ContactDiffUtil) {
-    private var selectContactResponseListener: ((ContactResponse) -> Unit)? = null
+class ContactFirebaseAdapter : ListAdapter<ContactDataFireBase, ContactFirebaseAdapter.ContactViewHolder>(ContactDiffUtil) {
+    private var selectContactDataFireBaseListener: ((ContactDataFireBase) -> Unit)? = null
 
-    object ContactDiffUtil : DiffUtil.ItemCallback<ContactResponse>() {
-        override fun areItemsTheSame(oldItem: ContactResponse, newItem: ContactResponse): Boolean {
+    object ContactDiffUtil : DiffUtil.ItemCallback<ContactDataFireBase>() {
+        override fun areItemsTheSame(oldItem: ContactDataFireBase, newItem: ContactDataFireBase): Boolean {
             return oldItem == newItem
         }
 
-        override fun areContentsTheSame(oldItem: ContactResponse, newItem: ContactResponse): Boolean {
+        override fun areContentsTheSame(oldItem: ContactDataFireBase, newItem: ContactDataFireBase): Boolean {
             return oldItem == newItem
         }
     }
     inner class ContactViewHolder(private val binding: ItemContactBinding) : RecyclerView.ViewHolder(binding.root) {
         init {
             binding.buttonMore.setOnClickListener {
-                selectContactResponseListener?.invoke(getItem(absoluteAdapterPosition))
+                selectContactDataFireBaseListener?.invoke(getItem(absoluteAdapterPosition))
             }
         }
 
@@ -43,7 +45,7 @@ class ContactAdapter : ListAdapter<ContactResponse, ContactAdapter.ContactViewHo
         holder.bind()
     }
 
-    fun setSelectContactDataListener(block: (ContactResponse) -> Unit) {
-        selectContactResponseListener = block
+    fun setSelectContactDataListener(block: (ContactDataFireBase) -> Unit) {
+        selectContactDataFireBaseListener = block
     }
 }

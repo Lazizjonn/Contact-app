@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 
 interface SplashViewModel {
 
-    val openContactScreenLiveData : LiveData<Unit>
-    val openLoginScreenLiveData : LiveData<Unit>
+    val openContactScreenLiveData: LiveData<Unit>
+    val openLoginScreenLiveData: LiveData<Unit>
 }
 

@@ -4,8 +4,8 @@ import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import uz.gita.contactappretrofit.domain.repository.Repository
-import uz.gita.contactappretrofit.domain.repository.impl.RepositoryImpl
+import uz.gita.contactappretrofit.domain.repository.AppRepository
+import uz.gita.contactappretrofit.domain.repository.impl.AppRepositoryImpl
 import javax.inject.Singleton
 
 
@@ -13,6 +13,6 @@ import javax.inject.Singleton
 interface RepositoryModule {
 
     @[Singleton Binds]
-    fun getRepository(impl: RepositoryImpl): Repository
+    fun getRepository(implApp: AppRepositoryImpl): AppRepository
 
 }
